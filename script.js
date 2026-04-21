@@ -4,7 +4,7 @@ const body = document.getElementsByTagName('body')[0];
 
 const app = {
     setup() {
-        const names = ref([]);
+        const jsonResults = ref([]);
 
         async function fetchEmployees() {
             let response = await fetch("https://yrgo-web-services.netlify.app/bookings");
@@ -25,7 +25,7 @@ const app = {
                     console.log("No results found")
                 }
                 else {
-                    names.value = results;
+                    jsonResults.value = results;
                 }
 
             });
@@ -35,7 +35,7 @@ const app = {
             createListOfNames();
         });
 
-        return { names };
+        return { jsonResults };
     }
 }
 

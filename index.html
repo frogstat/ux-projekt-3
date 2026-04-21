@@ -21,13 +21,23 @@
 
 <body>
     <div id="app">
-        <div class="employee" v-for="result of names">
+        <div class="dates" v-for="date of 30">
+            {{date}}
+        </div>
+
+        <div class="employee" v-for="result of jsonResults">
             <p class="employee-name">{{result.name}}</p>
             <div class="professions">
                 <div class="profession" v-for="profession of result.professions">
                     <img :src="'icons/' + profession.toLowerCase() + '.png'" :alt="profession" height="18">
                     {{profession}}
                 </div>
+            </div>
+        </div>
+
+        <div class="dates" v-for="date of 30">
+            <div class="employee" v-for="result of jsonResults">
+               
             </div>
         </div>
     </div>
