@@ -1,0 +1,23 @@
+.employee{
+    background-color: bisque;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    padding: 5px;
+}
+
+.employee > p {
+    margin: 5px;
+}
+
+.professions {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+img{
+    float: left;
+    margin-right: 2px;
+}

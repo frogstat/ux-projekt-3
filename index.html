@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "vue": "https://unpkg.com/vue@3.5.28/dist/vue.esm-browser.js"
+            },
+            "integrity": {
+                "https://unpkg.com/vue@3.5.28/dist/vue.esm-browser.js": "sha384-Q3gg1uvxzo7j5a5zJyKw57OkLMyOhl1sGmQxxn63S3lsr8Ki3ACSKKSvK8zG//7D"
+            }
+        }
+    </script>
+    <script src="script.js" type="module"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="employee" v-for="result of names">
+            <p class="employee-name">{{result.name}}</p>
+            <div class="professions">
+                <div class="profession" v-for="profession of result.professions">
+                    <img :src="'icons/' + profession.toLowerCase() + '.png'" :alt="profession" height="18">
+                    {{profession}}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
