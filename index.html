@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Informationsvisualisering</title>
     <link rel="stylesheet" href="styles.css">
     <script type="importmap">
         {
@@ -21,6 +21,47 @@
 
 <body>
     <div id="app">
+        <h3>Svenssons Hantverk AB</h3>
+
+        <div class="header-flex">
+
+            <div class="month-switch">
+                <button><</button>
+                <p>April</p>
+                <button>></button>
+            </div>
+
+            <span class="icon"><img src="icons/magnifying-glass.png" alt="magnifying-glass" height="20"></span>
+            <input type="text" placeholder="Sök efter medarbetare eller projekt">
+
+            <select name="jobs" id="jobs">
+                <option value="all-jobs">Visa alla yrken</option>
+                <option value="carpenter">Carpenter</option>
+                <option value="electrician">Electrician</option>
+                <option value="mason">Mason</option>
+                <option value="painter">Painter</option>
+                <option value="plumber">Plumber</option>
+            </select>
+
+            <select name="months" id="months">
+                <option value="month">Månad</option>
+                <option value="january">Januari</option>
+                <option value="february">Februari</option>
+                <option value="march">Mars</option>
+                <option value="april">April</option>
+                <option value="may">May</option>
+                <option value="june">Juni</option>
+                <option value="juli">Juli</option>
+                <option value="august">Augusti</option>
+                <option value="september">September</option>
+                <option value="october">Oktober</option>
+                <option value="novmeber">November</option>
+                <option value="december">December</option>
+            </select>
+
+            <button class="add-project-btn">Lägg till projekt +</button>
+        </div>
+
         <div class="dates" v-for="date of 30">
             {{date}}
         </div>
@@ -37,7 +78,7 @@
 
         <div class="dates" v-for="date of 30">
             <div class="employee" v-for="result of jsonResults">
-               
+
             </div>
         </div>
     </div>

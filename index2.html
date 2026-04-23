@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Schedule Grid</title>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .timeline-header {
+    display: grid;
+    grid-template-columns: 180px repeat(28, 40px);
+    position: sticky;
+    top: 0;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    z-index: 10;
+  }
+
+  .timeline-header div {
+    font-size: 12px;
+    text-align: center;
+    border-right: 1px solid #eee;
+    padding: 6px 0;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 180px repeat(28, 40px);
+    border-bottom: 1px solid #eee;
+    position: relative;
+    height: 44px;
+  }
+
+  .name {
+    padding: 10px;
+    border-right: 1px solid #eee;
+    background: #fafafa;
+    font-size: 13px;
+  }
+
+  .cell {
+    border-right: 1px solid #f3f3f3;
+  }
+
+  .bar {
+    position: absolute;
+    height: 24px;
+    top: 10px;
+    border-radius: 6px;
+    background: #4f46e5;
+    color: white;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+</style>
+</head>
+
+<body>
+<div id="app">
+  <div class="timeline-header">
+    <div>Employee</div>
+    <div v-for="d in days" :key="d">{{ d }}</div>
+  </div>
+
+  <div v-for="emp in employees" :key="emp.name" class="row">
+    <div class="name">{{ emp.name }}</div>
+
+    <div
+      v-for="i in 28"
+      :key="i"
+      class="cell"
+    ></div>
+
+    <div
+      v-for="job in emp.projects"
+      class="bar"
+      :style="barStyle(job)"
+    >
+      {{ job.label }}
+    </div>
+  </div>
+</div>
+
+<script>
+const { createApp } = Vue;
+
+createApp({
+  data() {
+    return {
+      days: Array.from({ length: 28 }, (_, i) => i + 1),
+      employees: [
+        {
+          name: "Alice",
+          projects: [
+            { label: "Project A", start: 2, end: 8 },
+            { label: "Project B", start: 12, end: 18 }
+          ]
+        },
+        {
+          name: "Bob",
+          projects: [
+            { label: "Project X", start: 1, end: 6 },
+            { label: "Project Y", start: 10, end: 25 }
+          ]
+        }
+      ]
+    };
+  },
+  methods: {
+    barStyle(job) {
+      const cellWidth = 40;
+      const nameColWidth = 180;
+
+      return {
+        left: nameColWidth + (job.start - 1) * cellWidth + "px",
+        width: (job.end - job.start + 1) * cellWidth + "px",
+        background: "#4f46e5"
+      };
+    }
+  }
+}).mount("#app");
+</script>
+</body>
+</html>

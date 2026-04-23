@@ -1,3 +1,39 @@
+body{
+    padding: 0;
+}
+
+h3{
+    margin: 0;
+}
+
+img{
+    float: left;
+    margin-right: 2px;
+}
+
+button{
+    cursor: pointer;
+}
+
+p{
+    margin: 0;
+}
+
+select{
+    font-size: small;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid #9f9f9f;
+}
+
+input[type="text"]{
+    width: 220px;
+    background-color: #e7e7e7;
+    border: 1px solid #9f9f9f;
+    border-radius: 5px;
+}
+
 .employee{
     background-color: bisque;
     border: 1px solid black;
@@ -17,7 +53,32 @@
     gap: 10px;
 }
 
-img{
-    float: left;
-    margin-right: 2px;
+.month-switch{
+    display: flex;
+    background-color: aqua;
+}
+
+.header-flex{
+    display: flex;
+    background-color: antiquewhite;
+    height: 30px;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.icon {
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 18px;
+}
+
+.add-project-btn{
+    font-size: small;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid #9f9f9f;
 }
