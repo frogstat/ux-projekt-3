@@ -37,6 +37,7 @@ input[type="text"]{
 
 .employee{
     display: flex;
+    height: 60px;
 }
 
 .employee-card{
@@ -44,7 +45,8 @@ input[type="text"]{
     border: 1px solid black;
     display: flex;
     flex-direction: column;
-    width: 15%;
+    width: 17%;
+    min-width: 17%;
     padding: 5px;
 }
 
@@ -53,10 +55,22 @@ input[type="text"]{
 }
 
 .bookings{
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+    display: flex;
     width: 85%;
     background-color: rgb(172, 171, 171);
+}
+
+.booking-section{
+    flex: 1;
+    border: 1px solid black;
+}
+
+.booked{
+    background-color: red;
+}
+
+.preliminary-booked{
+    background-color: yellow;
 }
 
 .bar{

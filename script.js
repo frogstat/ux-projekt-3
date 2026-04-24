@@ -3,17 +3,25 @@ import { createApp, ref, onMounted } from "vue";
 const body = document.getElementsByTagName('body')[0];
 
 const app = {
-    data(){
-        return{
-            baseStart: parseDate("2026-03-30")
+    data() {
+        const startDate = new Date("2026-03-30");
+        return {
+            days: Array.from({ length: 28 }, (_, i) => {
+                const d = new Date(startDate);
+                d.setDate(startDate.getDate() + i);
+                return d;
+            })
         }
     },
 
     computed: {
-        visibleDays() {
-          return Array.from({ length: 28 }, (_, i) =>
-            addDays(this.baseStart, i)
-          );
+        days() {
+            return Array.from({ length: 28 }, (_, i) => {
+                const d = new Date(this.startDate);
+                d.setDate(this.startDate.getDate() + i);
+                return d;
+            });
+        }
     },
 
     setup() {
@@ -31,7 +39,7 @@ const app = {
             return data;
         }
 
-        async function createListOfNames() {
+        async function createListOfResults() {
             fetchEmployees().then(results => {
 
                 if (results.length === 0) {
@@ -44,39 +52,44 @@ const app = {
             });
         }
 
-        function barStyle(job) {
-            const from = job.from;
-            const to = job.to;
-            const height = job.percentage === 100 ? 2 : 1;
-            const diffDays = getDateDiff(from, to);
-
-            console.log("From: " + from + ". To: " + to);
-            console.log(diffDays);
-            return {
-                height: height
-            }
-        }
-
-        function getDateDiff(from, to) {
-            const fromDate = new Date(from);
-            const toDate = new Date(to);
-
-            const diffDate = toDate - fromDate;
-            const diffDays = Math.ceil(diffDate / (1000 * 60 * 60 * 24));
-
-            return diffDays;
-        }
-
-        function visibleProjects(job) {
-            
-            return
-        }
-
         onMounted(() => {
-            createListOfNames();
+            createListOfResults();
         });
 
 
-        return { jsonResults, barStyle };
+        return { jsonResults };
+    },
+
+    methods: {
+        next28Days() {
+            const newDate = new Date(this.startDate);
+            newDate.setDate(newDate.getDate() + 28);
+            this.startDate = newDate;
+        },
+
+        previous28Days() {
+            const newDate = new Date(this.startDate);
+            newDate.setDate(newDate.getDate() - 28);
+            this.startDate = newDate;
+        },
+
+        setBookingStyle(result, currentDay) {
+            let backgroundColor = "grey";
+
+            for (const booking of result.bookings) {
+                const from = new Date(booking.from);
+                const to = new Date(booking.to);
+
+                if (currentDay >= from && currentDay <= to) {
+                    backgroundColor = booking.status === "Preliminary" ? "yellow" : "red";
+                    break;
+                }
+            }
+
+            //CSS style
+            return "background-color: " + backgroundColor;
+        }
     }
-}.mount("#app")}
+}
+
+createApp(app).mount("#app")

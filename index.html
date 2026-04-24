@@ -26,9 +26,9 @@
         <div class="header-flex">
 
             <div class="month-switch">
-                <button>< Previous 4 weeks</button>
+                <button @click="previous28Days">< Previous 4 weeks</button>
                 <p>April</p>
-                <button>Next 4 weeks ></button>
+                <button @click="next28Days">Next 4 weeks ></button>
             </div>
 
             <span class="icon"><img src="icons/magnifying-glass.png" alt="magnifying-glass" height="20"></span>
@@ -43,27 +43,7 @@
                 <option value="plumber">Plumber</option>
             </select>
 
-            <select name="months" id="months">
-                <option value="month">Månad</option>
-                <option value="january">Januari</option>
-                <option value="february">Februari</option>
-                <option value="march">Mars</option>
-                <option value="april">April</option>
-                <option value="may">May</option>
-                <option value="june">Juni</option>
-                <option value="juli">Juli</option>
-                <option value="august">Augusti</option>
-                <option value="september">September</option>
-                <option value="october">Oktober</option>
-                <option value="novmeber">November</option>
-                <option value="december">December</option>
-            </select>
-
             <button class="add-project-btn">Lägg till projekt +</button>
-        </div>
-
-        <div class="dates" v-for="date of 30">
-            {{date}}
         </div>
 
         <div class="employee" v-for="result of jsonResults">
@@ -76,19 +56,9 @@
                     </div>
                 </div>
             </div>
-            <div class="bookings">
-                <div v-for="booking of result.bookings">
-                    <div class="bar" :style="barStyle(booking)">
-                        {{booking.activity}}
-                        {{booking.percentage}}%
-                    </div>
+            <div class="bookings" v-for="day of days">
+                <div class="booking-section" :style="setBookingStyle(result, day)">
                 </div>
-            </div>
-        </div>
-
-        <div class="dates" v-for="date of 30">
-            <div class="employee" v-for="result of jsonResults">
-
             </div>
         </div>
     </div>
