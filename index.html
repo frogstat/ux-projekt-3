@@ -26,16 +26,14 @@
         <div class="header-flex">
 
             <div class="month-switch">
-                <button @click="previous28Days">< Previous 4 weeks</button>
-                <p>April</p>
-                <button @click="next28Days">Next 4 weeks ></button>
+                <button @click="previous28Days">Previous 4 weeks</button>
+                <button @click="next28Days">Next 4 weeks</button>
             </div>
 
-            <span class="icon"><img src="icons/magnifying-glass.png" alt="magnifying-glass" height="20"></span>
-            <input type="text" placeholder="Sök efter medarbetare eller projekt">
+            <input type="text" placeholder="Search employee">
 
             <select name="jobs" id="jobs">
-                <option value="all-jobs">Visa alla yrken</option>
+                <option value="all-jobs">Show all occupations</option>
                 <option value="carpenter">Carpenter</option>
                 <option value="electrician">Electrician</option>
                 <option value="mason">Mason</option>
@@ -43,7 +41,7 @@
                 <option value="plumber">Plumber</option>
             </select>
 
-            <button class="add-project-btn">Lägg till projekt +</button>
+            <button class="add-project-btn">Add project +</button>
         </div>
 
         <div class="employee" v-for="result of jsonResults">
@@ -58,6 +56,7 @@
             </div>
             <div class="bookings" v-for="day of days">
                 <div class="booking-section" :style="setBookingStyle(result, day)">
+                    {{parseDayOfWeek(day.getDay())}}
                 </div>
             </div>
         </div>

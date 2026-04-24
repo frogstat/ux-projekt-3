@@ -58,11 +58,12 @@ input[type="text"]{
     display: flex;
     width: 85%;
     background-color: rgb(172, 171, 171);
+    border-right: solid 1px rgb(53, 53, 53);
 }
 
 .booking-section{
     flex: 1;
-    border: 1px solid black;
+    border-bottom: 2px solid black;
 }
 
 .booked{

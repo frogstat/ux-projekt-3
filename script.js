@@ -4,13 +4,8 @@ const body = document.getElementsByTagName('body')[0];
 
 const app = {
     data() {
-        const startDate = new Date("2026-03-30");
         return {
-            days: Array.from({ length: 28 }, (_, i) => {
-                const d = new Date(startDate);
-                d.setDate(startDate.getDate() + i);
-                return d;
-            })
+            startDate: new Date("2026-03-30")
         }
     },
 
@@ -74,20 +69,34 @@ const app = {
         },
 
         setBookingStyle(result, currentDay) {
-            let backgroundColor = "grey";
+            let backgroundColor = "#E4E4E4";
 
             for (const booking of result.bookings) {
                 const from = new Date(booking.from);
                 const to = new Date(booking.to);
 
                 if (currentDay >= from && currentDay <= to) {
-                    backgroundColor = booking.status === "Preliminary" ? "yellow" : "red";
+                    backgroundColor = booking.status === "Preliminary" ? "#FFE59D" : "#FFA1A1";
                     break;
                 }
             }
 
             //CSS style
             return "background-color: " + backgroundColor;
+        },
+
+        parseDayOfWeek(day) {
+            const days = [
+                "Sun",
+                "Mon",
+                "Tue",
+                "Wed",
+                "Thu",
+                "Fri",
+                "Sat"
+            ];
+
+            return days[day] ?? "";
         }
     }
 }
