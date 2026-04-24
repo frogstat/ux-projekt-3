@@ -26,9 +26,9 @@
         <div class="header-flex">
 
             <div class="month-switch">
-                <button><</button>
+                <button>< Previous 4 weeks</button>
                 <p>April</p>
-                <button>></button>
+                <button>Next 4 weeks ></button>
             </div>
 
             <span class="icon"><img src="icons/magnifying-glass.png" alt="magnifying-glass" height="20"></span>
@@ -67,11 +67,21 @@
         </div>
 
         <div class="employee" v-for="result of jsonResults">
-            <p class="employee-name">{{result.name}}</p>
-            <div class="professions">
-                <div class="profession" v-for="profession of result.professions">
-                    <img :src="'icons/' + profession.toLowerCase() + '.png'" :alt="profession" height="18">
-                    {{profession}}
+            <div class="employee-card">
+                <p class="employee-name">{{result.name}}</p>
+                <div class="professions">
+                    <div class="profession" v-for="profession of result.professions">
+                        <img :src="'icons/' + profession.toLowerCase() + '.png'" :alt="profession" height="18">
+                        {{profession}}
+                    </div>
+                </div>
+            </div>
+            <div class="bookings">
+                <div v-for="booking of result.bookings">
+                    <div class="bar" :style="barStyle(booking)">
+                        {{booking.activity}}
+                        {{booking.percentage}}%
+                    </div>
                 </div>
             </div>
         </div>
