@@ -87,9 +87,8 @@ input[type="text"]{
     gap: 10px;
 }
 
-.month-switch{
+.weeks-switch{
     display: flex;
-    background-color: aqua;
 }
 
 .header-flex{
@@ -115,4 +114,36 @@ input[type="text"]{
     border-radius: 5px;
     background-color: white;
     border: 1px solid #9f9f9f;
+}
+
+
+
+.calendar-header {
+    display: flex;
+    margin-left: 250px;
+    margin-bottom: 10px;
+}
+
+.week {
+    display: flex;
+    flex-direction: column;
+    /* margin-right: 10px; */
+}
+
+.week-title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.week-days {
+    display: flex;
+}
+
+.day-box {
+    width: 39.4px;
+    height: 50px;
+    border: 1px solid #999;
+    text-align: center;
+    background: #eee;
 }

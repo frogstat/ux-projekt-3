@@ -25,7 +25,7 @@
 
         <div class="header-flex">
 
-            <div class="month-switch">
+            <div class="weeks-switch">
                 <button @click="previous28Days">Previous 4 weeks</button>
                 <button @click="next28Days">Next 4 weeks</button>
             </div>
@@ -42,6 +42,27 @@
             </select>
 
             <button class="add-project-btn">Add project +</button>
+        </div>
+
+        <div class="calendar-header">
+
+            <div class="week" v-for="week in weeks">
+
+                <!-- Vecka nummer -->
+                <div class="week-title">
+                    Vecka {{ getWeekNumber(week[0]) }}
+                </div>
+
+                <!-- Dagar -->
+                <div class="week-days">
+                    <div class="day-box" v-for="day in week">
+                        <div>{{ parseDayOfWeek(day.getDay()) }}</div>
+                        <div>{{ day.getDate() }}</div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
         <div class="employee" v-for="result of jsonResults">

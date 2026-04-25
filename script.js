@@ -16,6 +16,16 @@ const app = {
                 d.setDate(this.startDate.getDate() + i);
                 return d;
             });
+        },
+
+        weeks() {
+            const weeks = [];
+
+            for (let i = 0; i < this.days.length; i += 7) {
+                weeks.push(this.days.slice(i, i + 7));
+            }
+
+            return weeks;
         }
     },
 
@@ -97,6 +107,19 @@ const app = {
             ];
 
             return days[day] ?? "";
+        },
+
+        getWeekNumber(date) {
+            const d = new Date(date);
+            d.setHours(0, 0, 0, 0);
+
+            // ISO week logic
+            d.setDate(d.getDate() + 3 - (d.getDay() + 6) % 7);
+            const week1 = new Date(d.getFullYear(), 0, 4);
+
+            return 1 + Math.round(
+                ((d - week1) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7
+            );
         }
     }
 }
