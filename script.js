@@ -96,7 +96,13 @@ const app = {
                 const to = new Date(booking.to);
 
                 if (currentDay >= from && currentDay <= to) {
-                    backgroundColor = booking.status === "Preliminary" ? "#FFE59D" : "#FFA1A1";
+                    if(booking.status === "Preliminary"){
+                        backgroundColor = "#FFE59D";
+                    } else if (booking.status === "Booked"){
+                        backgroundColor = "#FFA1A1";
+                    } else if (booking.status === "Absent"){
+                        backgroundColor = "#A949BB"
+                    }
                     break;
                 }
             }
@@ -106,15 +112,22 @@ const app = {
         },
 
         getPercentage(result, currentDay) {
+            let numOfMatches = 0;
+            let outputString = "";
+
             for (const booking of result.bookings) {
                 const from = new Date(booking.from);
                 const to = new Date(booking.to);
 
                 if (currentDay >= from && currentDay <= to) {
-                    return booking.percentage + "%";
+                    numOfMatches ++;
+                    outputString = booking.percentage + "%";
                 }
             }
-            return "";
+            if(numOfMatches === 2){
+                outputString = "2x 50%"
+            }
+            return outputString;
 
         },
 
