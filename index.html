@@ -26,60 +26,71 @@
         <div class="header-flex">
 
             <div class="weeks-switch">
-                <button @click="previous28Days">Previous 4 weeks</button>
-                <button @click="next28Days">Next 4 weeks</button>
+                <button @click="previous28Days" class=""><img src="icons/arrow.png" alt="arrow-left" height="15"
+                        style="transform: rotate(180deg);">Previous 4 weeks</button>
+                <button @click="next28Days">Next 4 weeks<img src="icons/arrow.png" alt="arrow-right"
+                        height="15"></button>
             </div>
 
             <input type="text" placeholder="Search employee">
 
-            <select name="jobs" id="jobs">
+            <select v-model="selectedJob" name="jobs" id="jobs">
                 <option value="all-jobs">Show all occupations</option>
-                <option value="carpenter">Carpenter</option>
-                <option value="electrician">Electrician</option>
-                <option value="mason">Mason</option>
-                <option value="painter">Painter</option>
-                <option value="plumber">Plumber</option>
+                <option value="Carpenter">Carpenter</option>
+                <option value="Electrician">Electrician</option>
+                <option value="Mason">Mason</option>
+                <option value="Painter">Painter</option>
+                <option value="Plumber">Plumber</option>
             </select>
 
-            <button class="add-project-btn">Add project +</button>
+            <button class="add-project-btn">Add project <img src="icons/add.png" alt="add" height="15"></button>
+        </div>
+
+        <div class="color-code-display">
+            <p>Red - Booked</p>
+            <p>Yellow - Preliminary booked</p>
+            <p>Grey - Unbooked</p>
         </div>
 
         <div class="calendar-header">
+            <div class="empty-div"></div>
 
-            <div class="week" v-for="week in weeks">
+            <div class="all-weeks">
+                <div class="week" v-for="week in weeks">
 
-                <!-- Vecka nummer -->
-                <div class="week-title">
-                    Week {{ getWeekNumber(week[0]) }}
-                </div>
-
-                <!-- Dagar -->
-                <div class="week-days">
-                    <div class="day-box" v-for="day in week">
-                        <div>{{ parseDayOfWeek(day.getDay()) }}</div>
-                        <div>{{ day.getDate() }}</div>
+                    <!-- Vecka nummer -->
+                    <div class="week-title">
+                        Week {{ getWeekNumber(week[0]) }}
                     </div>
-                </div>
 
+                    <!-- Dagar -->
+                    <div class="week-days">
+                        <div class="day-box" v-for="day in week">
+                            <div>{{ parseDayOfWeek(day.getDay()) }}</div>
+                            <div>{{ day.getDate() }}</div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
         </div>
 
-        <div class="employee" v-for="result of jsonResults">
-            <div class="employee-card">
-                <p class="employee-name">{{result.name}}</p>
-                <div class="professions">
-                    <div class="profession" v-for="profession of result.professions">
-                        <img :src="'icons/' + profession.toLowerCase() + '.png'" :alt="profession" height="18">
-                        {{profession}}
+        <div class="employee" v-for="result of filteredEmployees">
+                <div class="employee-card">
+                    <p class="employee-name">{{result.name}}</p>
+                    <div class="professions">
+                        <div class="profession" v-for="profession of result.professions">
+                            <img :src="'icons/' + profession.toLowerCase() + '.png'" :alt="profession" height="18">
+                            {{profession}}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="bookings" v-for="day of days">
-                <div class="booking-section" :style="setBookingStyle(result, day)">
-                    {{parseDayOfWeek(day.getDay())}}
+                <div class="bookings" v-for="day of days">
+                    <div class="booking-section" :style="setBookingStyle(result, day)">
+                        {{getPercentage(result, day)}}
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
 </body>

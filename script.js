@@ -5,7 +5,8 @@ const body = document.getElementsByTagName('body')[0];
 const app = {
     data() {
         return {
-            startDate: new Date("2026-03-30")
+            startDate: new Date("2026-03-30"),
+            selectedJob: "all-jobs"
         }
     },
 
@@ -26,12 +27,21 @@ const app = {
             }
 
             return weeks;
+        },
+
+        filteredEmployees() {
+            if (this.selectedJob === "all-jobs") {
+                return this.jsonResults;
+            }
+
+            return this.jsonResults.filter(emp =>
+                emp.professions.includes(this.selectedJob)
+            );
         }
     },
 
     setup() {
         const jsonResults = ref([]);
-
         async function fetchEmployees() {
             let response = await fetch("https://yrgo-web-services.netlify.app/bookings");
 
@@ -93,6 +103,19 @@ const app = {
 
             //CSS style
             return "background-color: " + backgroundColor;
+        },
+
+        getPercentage(result, currentDay) {
+            for (const booking of result.bookings) {
+                const from = new Date(booking.from);
+                const to = new Date(booking.to);
+
+                if (currentDay >= from && currentDay <= to) {
+                    return booking.percentage + "%";
+                }
+            }
+            return "";
+
         },
 
         parseDayOfWeek(day) {
