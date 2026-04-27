@@ -58,12 +58,10 @@
             <div class="all-weeks">
                 <div class="week" v-for="week in weeks">
 
-                    <!-- Vecka nummer -->
                     <div class="week-title">
                         Week {{ getWeekNumber(week[0]) }}
                     </div>
 
-                    <!-- Dagar -->
                     <div class="week-days">
                         <div class="day-box" v-for="day in week">
                             <div>{{ parseDayOfWeek(day.getDay()) }}</div>
