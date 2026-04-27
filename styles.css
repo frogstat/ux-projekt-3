@@ -61,6 +61,7 @@ input[type="text"]{
     width: 85%;
     background-color: rgb(172, 171, 171);
     border-right: solid 1px rgb(53, 53, 53);
+    overflow: hidden;
 }
 
 .booking-section{
