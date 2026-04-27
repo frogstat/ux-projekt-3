@@ -140,8 +140,12 @@ input[type="text"]{
     display: flex;
 }
 
-.empty-div{
+.employee-div{
     width:17.8%;
+}
+
+.employee-div p{
+    margin-top: 50px;
 }
 
 .all-weeks{
