@@ -102,7 +102,7 @@ const app = {
                     } else if (booking.status === "Booked"){
                         backgroundColor = "#FFA1A1";
                     } else if (booking.status === "Absent"){
-                        backgroundColor = "#A949BB"
+                        backgroundColor = "#c674d4"
                     }
                     break;
                 }
